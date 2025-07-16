@@ -1,0 +1,244 @@
+
+:root {
+  --primary-color: #6F4E37; /* Coffee brown */
+  --secondary-color: #F5F5DC; /* Beige */
+  --accent-color: #D2B48C; /* Tan */
+  --text-color: #333;
+  --bg-color: #FFFFFF;
+  --max-width: 1200px;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Header & Navigation */
+.app-header {
+  background-color: var(--bg-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.main-nav a, .main-nav button {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.main-nav a:hover, .main-nav button:hover {
+  background-color: #f0f0f0;
+}
+
+.main-nav a.active {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Products Page */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background-color: var(--bg-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #eee;
+}
+
+.product-info {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info h3 {
+  margin: 0 0 0.5rem;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #5a3e2b;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+
+/* Login Form */
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: var(--bg-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  box-sizing: border-box; /* Important */
+}
+
+.error-message {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Cart Page */
+.cart-items {
+    margin-bottom: 2rem;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+.cart-item-info {
+    flex-grow: 1;
+}
+.cart-item-actions button {
+    background: none;
+    border: 1px solid #ccc;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius);
+}
+
+.cart-summary {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: right;
+}
+
+.cart-summary h2 {
+    text-align: left;
+}
+
+.cart-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
