@@ -1,34 +1,31 @@
+// backend/src/database.ts
 
 import sql from 'mssql';
-import { env } from './env';
 
+// This configuration reads all sensitive data from environment variables.
+// IMPORTANT: You MUST set these variables in the Render dashboard environment tab.
 const dbConfig: sql.config = {
-    user: env.DB_USER,
-    password: env.DB_PASSWORD,
-    server: env.DB_SERVER,
-    database: env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    server: process.env.DB_SERVER as string,
+    database: process.env.DB_DATABASE,
     options: {
-        encrypt: env.DB_ENCRYPT,
-        trustServerCertificate: true // Recommended to set to false in strict production, but true is often needed for local dev or certain cloud setups.
+        encrypt: process.env.DB_ENCRYPT === 'true', // Use true for Azure SQL, for example
+        trustServerCertificate: process.env.DB_TRUST_SERVER_CERTIFICATE === 'true' // Use true for local dev or self-signed certs
     }
 };
-
-let pool: sql.ConnectionPool;
 
 export const connectDB = async () => {
     try {
-        console.log('Connecting to database...');
-        pool = await new sql.ConnectionPool(dbConfig).connect();
-        console.log('Database connection successful.');
+        console.log('Attempting to connect to the database...');
+        if (!dbConfig.server) {
+            throw new Error('DB_SERVER environment variable not set.');
+        }
+        await sql.connect(dbConfig);
+        console.log('Database connection established successfully.');
     } catch (err) {
         console.error('Database connection failed:', err);
+        // Re-throw the error to ensure the server startup process fails loudly.
         throw err;
     }
-};
-
-export const getDB = () => {
-    if (!pool) {
-        throw new Error('Database not connected. Call connectDB first.');
-    }
-    return pool;
 };
