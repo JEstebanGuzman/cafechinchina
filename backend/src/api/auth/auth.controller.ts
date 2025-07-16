@@ -1,7 +1,7 @@
-import express from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { authenticateUser } from './auth.service';
 
-export const loginUser = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { Correo, Contrasena } = req.body;
     if (!Correo || !Contrasena) {
